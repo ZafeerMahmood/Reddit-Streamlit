@@ -8,4 +8,6 @@ and display a graph of price to hours.
 
 finally does sentiment analaysis on the text of reddits post.
 
+sensitive information is sroted in the .env file not uploaded.
+
  
