@@ -12,11 +12,14 @@ load_dotenv()
 st.title('Dashboard for Reddit')
 st.write('This is a simple app to get the hot posts from the subreddit of your choice')
 
-subreddit = "wallstreetbets"
+subreddit = "wallstreetbets" 
+subreddit = st.text_input('Enter subreddit name', subreddit)
+
 type =st.selectbox('select type?', ('hot', 'new',))
 limit = st.selectbox(
     'select Limit?',
     ('10', '20', '30'))
+
 
 secret_key = os.getenv('secret_key')
 client_id = os.getenv('client_id')
@@ -40,15 +43,16 @@ res_hot = requests.get(
     f'https://oauth.reddit.com/r/{subreddit}/{type}', headers=header, params={'limit': limit}) # get the hot/new posts from the subreddit
 
 
-df_hot_posts = pd.DataFrame()
 
+df_hot_posts = pd.DataFrame()
 st.write(f'{type} posts from {subreddit}')
 
 st.dataframe(displayDf(res_hot, df_hot_posts),use_container_width=True)
 
-
-select = st.selectbox('Cryptocurrency ?', ('bitcoin', 'ethereum',))
+select='bitcoin'
+select = st.text_input('Enter coin name', select)
 interval = st.selectbox('Interval ?', (1,2,3))
+
 st.write(f'Chart of : {select}')
 st.button('Show Chart',on_click=chart(select, interval))
 
@@ -64,3 +68,7 @@ for post in res_hot.json()['data']['children']:
         }, ignore_index=True)
 
 st.dataframe(textRate)
+
+
+
+

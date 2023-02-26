@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import streamlit as st
+import altair as alt
 from textblob import TextBlob
 
 
@@ -20,8 +21,18 @@ def chart(select, selectInterval):
         st.write('Error while gettinf data for CoinGecko API :(')
     else:
         df = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
+        max_price = df['price'].max()
+        min_price = df['price'].min()
         df['datetime'] = pd.to_datetime(df['timestamp'], unit='ms')
-        st.line_chart(df,x='datetime',y='price')
+
+        # st.line_chart(df,x='datetime',y='price')
+        myScale = alt.Scale(domainMax=max_price, domainMin=min_price)
+        lineChart = alt.Chart(df).mark_line(clip=True).encode(
+        x='datetime',
+        y=alt.Y('price',scale=myScale)
+        ).interactive()
+        st.altair_chart(lineChart,use_container_width=True)
+            
         
 @st.cache(ttl=24*60*60)
 def displayDf(responseReddit, df_post_reddit ):
@@ -45,3 +56,5 @@ def rating(string):
     sentiment_score = text_blob_obj.sentiment.polarity
     sentiment_score_0_to_100 = (sentiment_score + 1) * 50
     return sentiment_score_0_to_100;
+
+
