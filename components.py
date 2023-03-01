@@ -2,14 +2,15 @@ import requests
 import pandas as pd
 import streamlit as st
 import altair as alt
-import re
-import unicodedata
 import nltk
+import unicodedata
 from nltk.corpus import stopwords
 from transformers import pipeline
+import requests
+import re
 
 #hugging face model can be change to any trained model hosted on huggingface.co/models
-specific_model = pipeline(model="finiteautomata/bertweet-base-sentiment-analysis")
+specific_model = pipeline(model="finiteautomata/bertweet-base-sentiment-analysis",)
 
 
 #funtion get crypto data from coingecko API and make a chart with altair and streamlit 
@@ -45,25 +46,27 @@ def chart(select, selectInterval):
 # funtion thats makes a dataframe with the posts from reddit
 #@parameter responseReddit - the response from the reddit API and an emty dataFrame
 #@return df_post_reddit - the dataframe with the posts
-@st.cache(ttl=24*60*60)
-def displayDf(responseReddit):
+
+def displayDf(url,header,type):
+    responseReddit = requests.get(url, headers=header, params={'limit': 100})
     df_post_reddit=pd.DataFrame()
     # iterate over the posts to make a df to show
     for post in responseReddit.json()['data']['children']:
-        df_post_reddit = df_post_reddit.append(
-            {
-                'title': post['data']['title'],
-                'author_fullname': post['data']['author_fullname'],
-                'selftext': post['data']['selftext'],
-                'upvote_ratio': post['data']['upvote_ratio'],
-                'post_url': post['data']['url'],
-                'num_comments': post['data']['num_comments'],
-                'post_upvote': post['data']['ups'],
-                'link_flair_text': post['data']['link_flair_text'],
-                'Sentiment': specific_model(post['data']['title'])[0]['label'],
-                'Sentiment_score': specific_model(post['data']['title'])[0]['score'],
-            }, ignore_index=True)
-    return df_post_reddit  # show the dataframe with streamlit
+            df_post_reddit = df_post_reddit.append(
+                {
+                    'title': post['data']['title'],
+                    'author_fullname': post['data']['author_fullname'],
+                    'selftext': post['data']['selftext'],
+                    'upvote_ratio': post['data']['upvote_ratio'],
+                    'post_url': post['data']['url'],
+                    'num_comments': post['data']['num_comments'],
+                    'post_upvote': post['data']['ups'],
+                    'link_flair_text': post['data']['link_flair_text'],
+                    'Sentiment': specific_model(post['data']['title'])[0]['label'],
+                    'Sentiment_score': specific_model(post['data']['title'])[0]['score'],
+                }, ignore_index=True)
+    df_post_reddit.to_csv(f'data_{type}.csv')
+     # show the dataframe with streamlit
 
 
 

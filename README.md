@@ -10,4 +10,17 @@ finally does sentiment analaysis on the text of reddits post.
 
 sensitive information is sroted in the .env file not uploaded.
 
+libaries required to run
+
+pandas
+requests
+streamlit
+dotenv
+altair
+transformers
+tensorflow
+unicodedata
+nltk with 'punkt' 'stopwords' 
+
+
  
