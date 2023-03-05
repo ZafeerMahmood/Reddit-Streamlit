@@ -3,8 +3,6 @@ import streamlit as st
 from components import chart,makeBarChartBigrams,makeBarChartTrigrams
 import pandas as pd
 
-
-
 st.set_page_config(layout='wide')
 st.title('Dashboard for Reddit')
 

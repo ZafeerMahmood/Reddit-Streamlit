@@ -37,3 +37,9 @@ pip                          23.0.1
 
 2. # streamlit run project2.py
 
+# docker info 
+   to run 
+   docker build -f Dockerfile -t app:latest .
+   docker run -p 8501:8501 app:latest
+
+

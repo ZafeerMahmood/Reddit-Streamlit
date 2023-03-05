@@ -1,8 +1,33 @@
 import os
 from dotenv import load_dotenv
-from components import displayDf
 import requests
 import time
+from transformers import pipeline
+import pandas as pd
+
+#hugging face model can be change to any trained model hosted on huggingface.co/models
+specific_model = pipeline(model="finiteautomata/bertweet-base-sentiment-analysis",)
+
+def displayDf(url,header,type):
+    responseReddit = requests.get(url, headers=header, params={'limit': 100})
+    df_post_reddit=pd.DataFrame()
+    # iterate over the posts to make a df to show
+    for post in responseReddit.json()['data']['children']:
+            df_post_reddit = df_post_reddit.append(
+                {
+                    'title': post['data']['title'],
+                    'author_fullname': post['data']['author_fullname'],
+                    'selftext': post['data']['selftext'],
+                    'upvote_ratio': post['data']['upvote_ratio'],
+                    'post_url': post['data']['url'],
+                    'num_comments': post['data']['num_comments'],
+                    'post_upvote': post['data']['ups'],
+                    'link_flair_text': post['data']['link_flair_text'],
+                    'Sentiment': specific_model(post['data']['title'])[0]['label'],
+                    'Sentiment_score': specific_model(post['data']['title'])[0]['score'],
+                }, ignore_index=True)
+    df_post_reddit.to_csv(f'data_{type}.csv')
+
 
 load_dotenv()
 
