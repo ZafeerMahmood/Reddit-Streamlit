@@ -31,6 +31,7 @@ url_new=f'https://oauth.reddit.com/r/{subreddit}/new'
 
 
 
+
 while True:
     displayDf(url_hot,header,'hot')
     displayDf(url_new,header,'new')

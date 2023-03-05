@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 import nltk
-import unicodedata
+import unicodedata2
 from nltk.corpus import stopwords
 from transformers import pipeline
 import requests
@@ -44,8 +44,10 @@ def chart(select, selectInterval):
         return [max_price, min_price, mean_price]
 
 # funtion thats makes a dataframe with the posts from reddit
-#@parameter responseReddit - the response from the reddit API and an emty dataFrame
-#@return df_post_reddit - the dataframe with the posts
+#@parameter url to get post
+#@parameter header for auth token 
+#@type as hot|new
+# save the dataframe as csv file as data_hot.csv & data_new.csv
 
 def displayDf(url,header,type):
     responseReddit = requests.get(url, headers=header, params={'limit': 100})
@@ -75,7 +77,7 @@ def displayDf(url,header,type):
 # @return words - the cleaned text
 def basic_clean(text):
     stopwords = nltk.corpus.stopwords.words('english')
-    text = (unicodedata.normalize('NFKD', text)
+    text = (unicodedata2.normalize('NFKD', text)
             .encode('ascii', 'ignore')
             .decode('utf-8', 'ignore')
             .lower())
@@ -138,3 +140,6 @@ def makeBarChartTrigrams(df):
         y=alt.Y("trigrams:N", sort='-x')
     )
     st.altair_chart(bars, use_container_width=True)
+
+
+print(basic_clean("Hello, I'm a sentence that needs to be cleaned!"))
