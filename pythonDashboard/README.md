@@ -45,8 +45,8 @@ pip                          23.0.1
 
 # Screen Shots
 
-![Alt text](screenshots\sc1.png?raw=true "1")
-![Alt text](screenshots\sc2.png?raw=true "2")
+![Alt text](https://raw.githubusercontent.com/ZafeerMahmood/Dashboard-python-/main/pythonDashboard/screenshots/sc1.png?raw=true "1")
+![Alt text](https://raw.githubusercontent.com/ZafeerMahmood/Dashboard-python-/main/pythonDashboard/screenshots/sc2.png?raw=true "2")
 
 
 
