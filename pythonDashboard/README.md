@@ -1,4 +1,4 @@
-# Dasboard with python stramlit
+# Dasboard with python streamlit 
 
 uses reddit api for python scripts to get new/hots post show it in a table
 make bigram and trigram.
@@ -28,13 +28,44 @@ huggingface-hub              0.12.1
 pip                          23.0.1
 ```
 
+# env
+```sh
+secret_key = '<YOUR_KEY>'
+client_id = '<YOUR_CLIENT_ID>'
+password='<PASSWORD>'
+nameForReddit="<USERNAME>"
+```
+
+
+
 # steps to run
 
  0. reddit api secret key python script client id Lookup example.env make your own .env file replace the given values
  1. py getData.py 2.
  2. streamlit run app.py
 
-# docker info 
+# docker 
+
+   file
+   ```docker
+    FROM python:3.11-slim
+    
+    WORKDIR /app
+    
+    COPY re.txt ./re.txt
+    
+    RUN pip install -r re.txt
+    
+    RUN python -m nltk.downloader punkt
+    RUN python -m nltk.downloader stopwords
+    RUN python -m nltk.downloader wordnet
+    
+    EXPOSE 8501
+    
+    COPY . .
+    
+    CMD streamlit run app.py
+   ```
    to run 
    ```cmd 
    docker build -f Dockerfile -t app:latest .
