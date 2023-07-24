@@ -40,9 +40,13 @@ nameForReddit="<USERNAME>"
 
 # steps to run
 
- 0. reddit api secret key python script client id Lookup example.env make your own .env file replace the given values
- 1. py getData.py 2.
- 2. streamlit run app.py
+ . reddit api secret key python script client id Lookup example.env make your own .env file replace the given values
+   ```cmd
+      git clone https://github.com/ZafeerMahmood/Dashboard-python-.git
+      cd pythonDashboard
+      py getData.py
+      streamlit run app.py
+   ```
 
 # docker 
 
