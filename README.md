@@ -43,7 +43,7 @@ nameForReddit="<USERNAME>"
  . reddit api secret key python script client id Lookup example.env make your own .env file replace the given values
    ```cmd
       git clone https://github.com/ZafeerMahmood/Dashboard-python-.git
-      cd pythonDashboard
+      cd pythonDashboard/src
       py getData.py
       streamlit run app.py
    ```
