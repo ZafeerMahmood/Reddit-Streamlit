@@ -1,4 +1,4 @@
-# Dasboard with python streamlit 
+# Dashboard with python streamlit
 
 uses reddit api for python scripts to get new/hots post show it in a table
 make bigram and trigram.
@@ -6,12 +6,13 @@ make bigram and trigram.
 then gets cryptocurrency data from a api of the last 24hours
 and display a graph of price to hours.
 
-finally does sentiment analaysis on the text of reddits post.
+finally does sentiment analysis on the text of reddit's post.
 
 sensitive information is stored in the .env file not uploaded.
 
-# dependencies
-```
+## dependencies
+
+```text
 Python                       3.11.1
 pandas                       1.5.3
 requests                     2.28.2
@@ -28,7 +29,8 @@ huggingface-hub              0.12.1
 pip                          23.0.1
 ```
 
-# env
+## env
+
 ```sh
 secret_key = '<YOUR_KEY>'
 client_id = '<YOUR_CLIENT_ID>'
@@ -38,9 +40,10 @@ nameForReddit="<USERNAME>"
 
 
 
-# steps to run
+## steps to run
 
  . reddit api secret key python script client id Lookup example.env make your own .env file replace the given values
+
    ```cmd
       git clone https://github.com/ZafeerMahmood/Dashboard-python-.git
       cd pythonDashboard/src
@@ -48,9 +51,10 @@ nameForReddit="<USERNAME>"
       streamlit run app.py
    ```
 
-# docker 
+## docker
 
    file
+
    ```docker
     FROM python:3.11-slim
     
@@ -70,14 +74,16 @@ nameForReddit="<USERNAME>"
     
     CMD streamlit run app.py
    ```
-   to run 
-   ```cmd 
+
+   to run
+
+   ```cmd
    docker build -f Dockerfile -t app:latest .
    docker run -p 8501:8501 app:latest
    ```
 
 
-# Screen Shots
+## Screen Shots
 
 ![Alt text](https://raw.githubusercontent.com/ZafeerMahmood/Dashboard-python-/main/pythonDashboard/screenshots/sc1.png?raw=true "1")
 ![Alt text](https://raw.githubusercontent.com/ZafeerMahmood/Dashboard-python-/main/pythonDashboard/screenshots/sc2.png?raw=true "2")
